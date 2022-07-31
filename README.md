@@ -3,11 +3,11 @@
 修改redis-config.xml中的jedisPool里的redis配置
 
 ### 2.项目执行
-通过mvn package进行打包,将生成war包,将wwar放入到Tomcat中的webapps中即可运行
+通过mvn package进行打包,将生成war包,将war包放入到Tomcat中的webapps中即可运行
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/6553c1c4635144079b5cb82457cef5e6.png)
 
-### 3.运行情况(在Tomcat中看不出任何效果,下来是在IDEA中执行的效果)
+### 3.运行情况(在Tomcat中看不出任何效果,下面是在IDEA中执行的效果)
 
 清理Redis中的缓存和七牛云的垃圾数据:
 
