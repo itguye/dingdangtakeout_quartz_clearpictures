@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                         http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--用于清理图片的bean对象-->
+    <bean name="clearImgJob" class="com.dudu.jobs.ClearImgJob"/>
+
+    <!--quartz-->
+    <!--用于清理缓存redis里的图片-->
+    <bean id="jobDetail_redis"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 注入目标对象 -->
+        <property name="targetObject" ref="clearImgJob"/>
+        <!-- 注入目标方法 -->
+        <property name="targetMethod" value="clearImg_redis"/>
+    </bean>
+
+    <!--用于清理数据库里的图片-->
+    <bean id="jobDetail_databases"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 注入目标对象 -->
+        <property name="targetObject" ref="clearImgJob"/>
+        <!-- 注入目标方法 -->
+        <property name="targetMethod" value="clearImg_databases"/>
+    </bean>
+
+    <!-- 注册一个触发器，指定任务触发的时间 -->
+    <!--用于清理缓存redis里的图片的注册器-->
+    <bean id="myTrigger_redis" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!-- 注入JobDetail -->
+        <property name="jobDetail" ref="jobDetail_redis"/>
+        <!-- 指定触发的时间，基于Cron表达式 -->
+        <property name="cronExpression">
+                <value>* 0/20 23 * * ? *</value> <!--每天晚上23点执行,每10分钟执行一次,一共执行3次-->
+<!--            <value>0/20 * * * * ? *</value> &lt;!&ndash;20s执行一次&ndash;&gt;-->
+        </property>
+    </bean>
+
+    <!--用于清理数据库里的图片注册器-->
+    <bean id="myTrigger_databases" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!-- 注入JobDetail -->
+        <property name="jobDetail" ref="jobDetail_databases"/>
+        <!-- 指定触发的时间，基于Cron表达式 -->
+        <property name="cronExpression">
+<!--                        <value>0/20 * * * * ? *</value> &lt;!&ndash;20s执行一次&ndash;&gt;-->
+            <value>* 0/20 * ? * 7 </value> <!--每周星期天晚上23点执行,每20分钟执行一次,一共执行3次-->
+        </property>
+    </bean>
+
+    <!-- 注册一个统一的调度工厂，通过这个调度工厂调度任务 -->
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <!-- 注入多个触发器 -->
+        <property name="triggers">
+            <list>
+                <ref bean="myTrigger_redis"/>
+                <ref bean="myTrigger_databases"/>
+            </list>
+        </property>
+    </bean>
+</beans>

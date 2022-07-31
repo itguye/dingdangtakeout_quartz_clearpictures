@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dudu.dao.SetmealMapper">
+    <delete id="removeSetmealById" parameterType="long">
+        delete from dish where id = #{id} and is_deleted = 1;
+    </delete>
+
+    <delete id="removeSetmealFlavorByDishId" parameterType="long">
+        delete from dish_flavor where id = #{dish_id} and is_deleted = 1;
+    </delete>
+
+    <select id="FinAllDelSetmeal" resultType="Dish">
+        select * from dish  where is_deleted = 1;
+    </select>
+
+
+</mapper>

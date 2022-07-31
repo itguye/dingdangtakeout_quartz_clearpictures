@@ -1,0 +1,10 @@
+com\dudu\entity\Setmeal.class
+com\dudu\dao\DishMapperImpl.class
+com\dudu\dao\DishMapper.class
+com\dudu\entity\SetmealDish.class
+com\dudu\jobs\ClearImgJob.class
+com\dudu\entity\DishFlavor.class
+com\dudu\dao\SetmealMapperImpl.class
+com\dudu\dao\SetmealMapper.class
+com\dudu\entity\Dish.class
+com\dudu\utiles\QiniuUtils.class

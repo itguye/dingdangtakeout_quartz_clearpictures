@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+ <!--导入Redis的配置-->
+ <import resource="redis-config.xml"/>
+ <!--导入quartz的配置-->
+ <import resource="quartz-config.xml"/>
+ <!--导入Mybatis的配置-->
+<import resource="spring-dao.xml"/>
+
+ <!--用于激活那些已经在spring容器里注册过的bean上面的注解，如@Resource ，@PostConstruct、@Antowired等自动注册-->
+<context:annotation-config></context:annotation-config>
+
+
+
+</beans>
