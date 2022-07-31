@@ -6,9 +6,9 @@
     <!--配置数据源：数据源有非常多，可以使用第三方的，也可使使用Spring的-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://124.220.28.236:8963/dingdang?useSSL=true&amp;useUnicode=true&amp;characterEncoding=utf8"/>
-        <property name="username" value="dingdang"/>
-        <property name="password" value="BBwCTkfHmmCCiwhK"/>
+        <property name="url" value="jdbc:mysql://192.168.0.1:8963/dingdang?useSSL=true&amp;useUnicode=true&amp;characterEncoding=utf8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
     </bean>
 
     <!--配置SqlSessionFactory-->
